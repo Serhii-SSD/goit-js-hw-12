@@ -101,14 +101,9 @@ function checkPaginationStatus(totalHits, isLoadMoreAction) {
   if (currentPage >= maxPages) {
     hideLoadMoreButton(); 
     
-    if (isLoadMoreAction) {
+    if (isLoadMoreAction || maxPages <= 1) {
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
-        position: 'topRight'
-      });
-    } else {
-      iziToast.info({
-        message: "All available images for this query have been loaded.",
         position: 'topRight'
       });
     }
@@ -116,6 +111,7 @@ function checkPaginationStatus(totalHits, isLoadMoreAction) {
     showLoadMoreButton(); 
   }
 }
+
 
 function smoothScroll() {
   const galleryItem = document.querySelector('.gallery-item');
