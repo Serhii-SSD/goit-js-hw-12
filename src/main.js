@@ -35,7 +35,7 @@ async function handleSearch(event) {
     return;
   }
 
-  currentPage = 1;  
+  currentPage = 1; 
   
   clearGallery(); 
   hideLoadMoreButton(); 
@@ -47,7 +47,6 @@ async function handleSearch(event) {
     const totalHits = data.totalHits;
 
     if (images.length === 0) {
-      hideLoader(); 
       iziToast.error({
         message: 'Sorry, there are no images matching your search query. Please try again!',
         position: 'topRight',
@@ -101,9 +100,15 @@ function checkPaginationStatus(totalHits, isLoadMoreAction) {
 
   if (currentPage >= maxPages) {
     hideLoadMoreButton(); 
+    
     if (isLoadMoreAction) {
       iziToast.info({
         message: "We're sorry, but you've reached the end of search results.",
+        position: 'topRight'
+      });
+    } else {
+      iziToast.info({
+        message: "All available images for this query have been loaded.",
         position: 'topRight'
       });
     }
